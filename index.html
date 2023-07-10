@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
+    <!-- firefox shortcut error -->
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="/index.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <h1>Project: Library</h1>
+      <h2>A simple HTML/CSS/JavaScript Personal Library Management</h2>
+    </div>
+
+    <!-- Form Input -->
+    <div class="book-input">
+      <h3>Book Input</h3>
+      <form action="#">
+        <label for="book-title">Title:</label>
+        <input type="text" id="book-title" name="booktitle" placeholder="Book Title" />
+
+        <label for="book-author">Author:</label>
+        <input type="text" id="book-author" name="bookauthor" placeholder="Book Author" />
+
+        <label for="book-pages">Pages:</label>
+        <input type="number" id="book-pages" name="bookpages" placeholder="Book Pages" />
+
+        <div class="radio">
+          <p>Read Status:</p>
+
+          <input type="radio" id="book-read" name="bookread" value="read" />
+          <label for="book-read">Read</label>
+
+          <input type="radio" id="book-not-read" name="bookread" value="not read yet" />
+          <label for="book-not-read">Not Read Yet</label>
+        </div>
+
+        <button type="submit" id="add-book">Submit Book</button>
+      </form>
+    </div>
+
+    <!-- Display -->
+    <div class="book-display">
+      <h3>Book Display</h3>
+      <table class="book-display__table" id="bookList">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Read Status</th>
+            <th>Option</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </body>
+</html>

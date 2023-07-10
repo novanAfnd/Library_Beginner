@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: linear-gradient(to bottom right, #eeaed8, #94a8e9);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Header _____________________________________________________________________________________________ */
+body h1,
+h2 {
+  color: white;
+  text-align: center;
+  margin: 10px;
+}
+
+/* Form Input Book ____________________________________________________________________________________*/
+.book-input {
+  background: white;
+  width: 450px;
+  height: auto;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 10px;
+}
+
+input[type="text"],
+[type="number"] {
+  width: 100%;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin: 2px 0px;
+  padding: 4px;
+  display: inline-block;
+}
+
+.book-input button {
+  color: white;
+  font-weight: 600;
+  background: gray;
+  width: 100%;
+  border-radius: 4px;
+  margin: 2px 0px;
+  padding: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.book-input button:hover {
+  color: black;
+  background: white;
+}
+
+/* Display Book ____________________________________________________________________________________*/
+.book-display {
+  background: white;
+  width: 450px;
+  height: auto;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.book-display__table {
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+td {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 0;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+#book-display__table__option {
+  width: 20%;
+}
+
+.book-display__table button {
+  width: 60px;
+  height: 20px;
+}
+
+/* Media Query for Desktop ____________________________________________________________________________________*/
+@media (min-width: 768px) {
+  .book-input {
+    width: 800px;
+  }
+
+  /* Display Book */
+  .book-display {
+    width: 800px;
+  }
+}
