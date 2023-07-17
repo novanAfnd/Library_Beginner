@@ -9,7 +9,7 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-// Retrieve Form Data __________________________________________________________________________________________________________________________________
+// Retrieve Form Data ________________________________________________________________________________________________________________________________________
 function retrieveData() {
   let formData = {};
   formData.bookTitle = document.getElementById("book-title").value;
@@ -17,7 +17,7 @@ function retrieveData() {
   formData.bookPages = document.getElementById("book-pages").value;
   formData.bookRead = document.getElementsByName("bookread");
 
-  // Read Status radio button
+  // Read Status Radio Button
   function radioButton() {
     if (document.getElementById("book-read").checked) {
       return (formData.bookRead = document.getElementById("book-read").value);
@@ -26,7 +26,7 @@ function retrieveData() {
     }
   }
 
-  radioButton(); // saat retrieveData() dipanggil maka fungsi ini juga akan berjalan
+  radioButton();
 
   return formData;
 }
@@ -34,8 +34,7 @@ function retrieveData() {
 // Submit Book Button _____________________________________________________________________________________________________________________________________________
 // disini bagaimana button bekerja saat data baru dimasukkan dan saat data lama diedit
 let selectedRow = null; // adalah global variable yang menunjukkan keadaan saat form input kosong
-const submitBook = document.getElementById("add-book").addEventListener("click", sumbitBook);
-function sumbitBook(e) {
+let submitBook = document.getElementById("add-book").addEventListener("click", (e) => {
   e.preventDefault(); // mencegah otomatis submit yang mengharuskan refresh page
   let formData = retrieveData();
   if (selectedRow === null) {
@@ -44,11 +43,11 @@ function sumbitBook(e) {
     updateData(formData); // saat data lama diperbarui
   }
   resertForm();
-}
+});
 
 // Add New Book to Library Array _________________________________________________________________________________________________________________________________
 function addNewBookToLibrary(data) {
-  // Pembuatan object book menggunakan Book Constructor
+  // Create object book with Book Constructor
   const book = new Book(data.bookTitle, data.bookAuthor, data.bookPages, data.bookRead);
 
   // Add book object to myLibrary array
@@ -85,12 +84,11 @@ function display(data) {
   cell6.innerHTML = "<button onClick='editBook(this)'>Edit</button> <button onClick='onDelete(this)'>Delete</button>";
 
   // data.length adalah jumlah keseluruhan data dalam array
-  //... kita tahu dalam indeks array selalu dimulai dari nol (0), namun jika kita menggunakan properti .length maka akan menanmpilkan "jumlah keseluruhan" data dalam array
+  //... dalam indeks array selalu dimulai dari nol (0), namun jika menggunakan properti .length
+  //... maka akan menanmpilkan "jumlah keseluruhan" data dalam array
   //... sehingga meskipun data dalam array adalah 0, 1, 2, 3 maka jumlah keseluruhan data tersebut adalah empat bukan tiga
   //... oleh sebab itu digunakan " data.length - 1 " , yaitu  jumlah dari keseluruhan array dikurangi satu
   //... sehingga hasilnya selalu menunjukkan item array yang paling terakhir
-
-  //console.log(newRow);
 }
 
 // Edit Data _________________________________________________________________________________________________________________________________________________
@@ -184,16 +182,16 @@ function updateIndex() {
   //... dan mencari data yang ada pada dataset masing-masing
   //... mungkin bisa jadi dengan loop
   // Yang diharapkan:
-  //... kita buat fungsi loop untuk memberikan keterangan semua index dari array myLibrary
-  //... kita juga buat fungsi loop untuk memberikan keterangan semua bookIndex dari dataset
+  //... buat fungsi loop untuk memberikan keterangan semua index dari array myLibrary
+  //... juga buat fungsi loop untuk memberikan keterangan semua bookIndex dari dataset
   //... sehingga setelah keterangan dari array myLibrary dan dataset sama-sama didapatkan
-  //... kemudian kita sinkronkan
+  //... kemudian disinkronkan
   //... misal pada keterangan index array terdapat angka (1, 2, 3) kemudian pada dataset terdapat angka (1, 3, 5)
-  //... maka nanti tinggal kita buat fungsi untuk menyinkronkan angka-angka tersebut
+  //... maka nanti tinggal buat fungsi untuk menyinkronkan angka-angka tersebut
   //... dimana jika array = 1 maka bookIndex harus 1, array 2 maka bookIndex yang 3 harus 2, array 3 maka bookIndex yang 35 harus 3, dan seterusnya
 
   // Pemikiran baru:
-  //... kita tahu bahwa index pada array akan selalu menyesuaikan sendiri, sedangkan bookIndex pada dataset tidak bisa menyesuaikan sendiri
+  //... index pada array akan selalu menyesuaikan sendiri, sedangkan bookIndex pada dataset tidak bisa menyesuaikan sendiri
   //... lalu, daripada repot2 membuat fungsi untuk memberi keterangan index dari myLibrary
   //... lebih baik buat fungsi untuk memberi keterangan index (bookIndex) dari dataset saja lalu buat fungsi untuk mengurutkan index acak-acakan tersebut
   //... urutan yang kacau tidak hanya pada bookIndex dari dataset saja, namun pada table nomor juga
