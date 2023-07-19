@@ -212,24 +212,32 @@ function updateData(formData) {
 
 function onDelete(td) {
   if (confirm("Do you want to delete this data?")) {
+    // Delete Rows
     row = td.parentElement.parentElement;
     document.getElementById("bookList").deleteRow(row.rowIndex); // ini hanya men-delete baris table
     delete row.dataset;
 
-    // Menurutkan nomor table
-    // Mengambil elemen nomor table dengan class "table-numbers" sebagai htmlcollection
+    // Delete Dataset
+
+    // Delete Object of arrays
+
+    // Sort the Table Number for each data deleted
+    // mengambil elemen nomor table dengan class "table-numbers" sebagai htmlcollection
     const htmlCollection = document.getElementsByClassName("table-numbers");
     console.log("_________________________________________");
     console.log(htmlCollection);
 
-    // Convert htmlCollection to array
+    // convert htmlCollection to array
     const arrayOfHtmlCollection = Array.prototype.slice.call(htmlCollection);
 
     console.log(arrayOfHtmlCollection.length);
 
     for (let i = 0; i < arrayOfHtmlCollection.length; i++) {
       console.log(arrayOfHtmlCollection[i]);
+      arrayOfHtmlCollection[i].innerHTML = i + 1; // + 1 karena i nilai awalnya 0
     }
+
+    // Sort the bookIndex Dataset for each data deleted
 
     /* 
     console.log("_________________________________________");
