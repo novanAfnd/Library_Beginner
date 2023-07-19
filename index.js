@@ -76,7 +76,7 @@ function display(data) {
   // insert data to table
   const cell1 = newRow.insertCell(0);
   cell1.innerHTML = table.rows.length; // dynamic table row
-  cell1.classList.add("table-row");
+  cell1.classList.add("table-numbers");
   const cell2 = newRow.insertCell(1);
   cell2.innerHTML = newRow.dataset.bookTitle;
   const cell3 = newRow.insertCell(2);
@@ -216,20 +216,30 @@ function onDelete(td) {
     document.getElementById("bookList").deleteRow(row.rowIndex); // ini hanya men-delete baris table
     delete row.dataset;
 
-    // Untuk memperbarui table nomor
-    const cell1 = document.getElementsByClassName("table-row");
+    // Menurutkan nomor table
+    // Mengambil elemen nomor table dengan class "table-numbers" sebagai htmlcollection
+    const htmlCollection = document.getElementsByClassName("table-numbers");
     console.log("_________________________________________");
-    console.log(cell1);
+    console.log(htmlCollection);
 
-    for (let i of cell1) {
-      console.log(cell1[i].innerHTML);
+    // Convert htmlCollection to array
+    const arrayOfHtmlCollection = Array.prototype.slice.call(htmlCollection);
+
+    console.log(arrayOfHtmlCollection.length);
+
+    for (let i = 0; i < arrayOfHtmlCollection.length; i++) {
+      console.log(arrayOfHtmlCollection[i]);
     }
 
+    /* 
     console.log("_________________________________________");
     console.log("setelah delete");
-    console.log(row.rowIndex);
     console.log(row);
-    console.log(row.dataset);
+    console.log("row index");
+    console.log(row.rowIndex);
+    console.log("row dataset");
+    console.log(row.dataset); 
+    */
   }
   resertForm();
 }
