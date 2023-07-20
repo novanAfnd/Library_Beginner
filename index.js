@@ -37,7 +37,7 @@ function retrieveData() {
 
 // Submit Book Button _____________________________________________________________________________________________________________________________________________
 // disini bagaimana button bekerja saat data baru dimasukkan dan saat data lama diedit
-let selectedRow = null; // adalah global variable yang menunjukkan keadaan saat form input kosong
+let selectedRow = null; // global variable yang menunjukkan keadaan saat form input kosong
 let submitBook = document.getElementById("add-book").addEventListener("click", (e) => {
   e.preventDefault(); // mencegah otomatis submit yang mengharuskan refresh page
   let formData = retrieveData();
@@ -66,14 +66,14 @@ function display(data) {
   const table = document.getElementById("bookList").getElementsByTagName("tbody")[0];
   const newRow = table.insertRow(table.length);
 
-  // add data- attribute
+  // Add data- attribute
   newRow.dataset.bookIndex = data.length - 1; // -1 karena data pertama pada array adalah bernomor index "0"
   newRow.dataset.bookTitle = data[data.length - 1].title;
   newRow.dataset.bookAuthor = data[data.length - 1].author;
   newRow.dataset.bookPages = data[data.length - 1].pages;
   newRow.dataset.bookRead = data[data.length - 1].read;
 
-  // insert data to table
+  // Insert data to table
   const cell1 = newRow.insertCell(0);
   cell1.innerHTML = table.rows.length; // dynamic table row
   cell1.classList.add("table-numbers");
@@ -104,6 +104,7 @@ function editBook(td) {
   document.getElementById("book-author").value = selectedRow.dataset.bookAuthor;
   document.getElementById("book-pages").value = selectedRow.dataset.bookPages;
   document.getElementsByName("bookread").value = selectedRow.dataset.bookRead;
+
   // bookRead ini yang agak sulit karena menggunakan radio button
   function radioButtonEdit() {
     if (document.getElementsByName("bookread").value == "read") {
@@ -114,10 +115,6 @@ function editBook(td) {
   }
 
   radioButtonEdit();
-
-  // Console.log tes
-  // console.log("ini adalah old dataset");
-  // console.log(selectedRow);
 
   const index = myLibrary.findIndex((obj) => {
     return obj.title === selectedRow.dataset.bookTitle;
@@ -139,13 +136,6 @@ function editBook(td) {
 }
 
 function updateData(formData) {
-  // ini masih bermasalah (urutan indexnya)
-  // form yang ditampilkan pada table sudah sinkron dengan dataset, namun belum sinkron dengan array myLibrary
-  // petunjuk sementara: kita punya data bookIndex, maka gunakan itu untuk menyinkronkan data dengan array
-  // bagaimana mengurutkan bookIndex, agar urutan pada array myLibrary sama dengan urutan pada bookIndex dataset
-  // ...bagaimana index yang ada pada myLibrary bisa dipakai di updateData() dan delete
-  // ...apakah dengan me-loop semua data????
-
   // urutan: nilai array => dataset => table
   // nilai object dalam array adalah nilai dari form
   myLibrary[selectedRow.dataset.bookIndex].title = formData.bookTitle;
@@ -166,7 +156,6 @@ function updateData(formData) {
   selectedRow.cells[4].innerHTML = selectedRow.dataset.bookRead;
 
   // Console.log tes, buat ngecek apakah fungsi update sudah berjalan semestinya
-
   console.log("dataset setelah update");
   console.log(selectedRow.dataset);
   console.log("array setelah update");
@@ -208,13 +197,13 @@ function updateData(formData) {
 // ... hal ini dinamakan "Get the index of an Object in an Array in JavaScript"
 // ... mungkin bisa digunakan findIndex()
 // Masalah:
-// belum bisa menghapus data pada dataset dan array
+// belum bisa menghapus data pada array
 
 function onDelete(td) {
   if (confirm("Do you want to delete this data?")) {
     // Delete Rows, Dataset and Array
     row = td.parentElement.parentElement;
-    document.getElementById("bookList").deleteRow(row.rowIndex); // menghapus elemen row dan dataset (bisa dicek pada devtools element)
+    document.getElementById("bookList").deleteRow(row.rowIndex); // menghapus row + dataset (bisa dicek pada devtools element)
 
     // Sort Row Number for each data deleted
     const htmlCollection = document.getElementsByClassName("table-numbers"); // mengambil elemen nomor table dengan class "table-numbers" sebagai htmlcollection
@@ -253,5 +242,5 @@ function resertForm() {
   document.getElementById("book-pages").value = "";
   document.getElementById("book-read").checked = false;
   document.getElementById("book-not-read").checked = false;
-  selectedRow = null; // kenapa harus ada null, karena "" tidak bisa menunjukkan nilai kosong pada radio button
+  selectedRow = null; // kenapa harus ada null?, karena "" tidak bisa menunjukkan nilai kosong pada radio button
 }
