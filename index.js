@@ -214,15 +214,14 @@ function onDelete(td) {
   if (confirm("Do you want to delete this data?")) {
     // Delete Rows, Dataset and Array
     row = td.parentElement.parentElement;
-    // document.getElementById("bookList").deleteRow(row.rowIndex); // menghapus elemen row dan datasetnya (bisa dicek pada devtools element)
+    document.getElementById("bookList").deleteRow(row.rowIndex); // menghapus elemen row dan dataset (bisa dicek pada devtools element)
 
     // Sort Row Number for each data deleted
     const htmlCollection = document.getElementsByClassName("table-numbers"); // mengambil elemen nomor table dengan class "table-numbers" sebagai htmlcollection
     console.log("_________________________________________");
     console.log(htmlCollection);
 
-    // convert htmlCollection to array
-    const arrayOfHtmlCollection = Array.prototype.slice.call(htmlCollection);
+    const arrayOfHtmlCollection = Array.prototype.slice.call(htmlCollection); // convert htmlCollection to array
 
     for (let i = 0; i < arrayOfHtmlCollection.length; i++) {
       console.log(arrayOfHtmlCollection[i]);
@@ -230,18 +229,19 @@ function onDelete(td) {
     }
 
     // Sort Dataset bookIndex for each data deleted
-
-    console.log(row);
-    console.log(row.dataset.bookIndex);
-
-    /*  
-    const datasetCollection = document.getElementById("bookList").dataset;
+    const datasetCollection = document.getElementsByClassName("table-numbers");
 
     console.log("_________________________________________");
-    for (item of datasetCollection) {
-      console.log(item);
-    } 
-    */
+    let i = 0;
+    while (i < datasetCollection.length) {
+      datasetCollection[i].parentElement.dataset.bookIndex = i; // menggunakan while loop agar dataset awal angka 0
+      //console.log(datasetCollection[i].parentElement);
+      i++;
+    }
+
+    for (let i = 0; i < datasetCollection.length; i++) {
+      console.log(datasetCollection[i].parentElement); // untuk mengecek dataset apakah berawal angka 0
+    }
   }
   resertForm();
 }
