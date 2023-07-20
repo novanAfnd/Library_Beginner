@@ -1,6 +1,6 @@
 // buat agar data pada array, dataset dan table singkron
 // buat agar nomor pada table bisa urut dan singkron dengan array dan dataset
-// buat agar jika memasukkan booktitle yang sama akan peringatan error
+// buat agar jika memasukkan buku dengan booktitle dan author yang sama akan peringatan error
 
 // Library Array _____________________________________________________________________________________________________________________________________________
 let myLibrary = [];
@@ -212,41 +212,35 @@ function updateData(formData) {
 
 function onDelete(td) {
   if (confirm("Do you want to delete this data?")) {
-    // Delete Rows
+    // Delete Rows, Dataset and Array
     row = td.parentElement.parentElement;
-    document.getElementById("bookList").deleteRow(row.rowIndex); // ini hanya men-delete baris table
-    delete row.dataset;
+    // document.getElementById("bookList").deleteRow(row.rowIndex); // menghapus elemen row dan datasetnya (bisa dicek pada devtools element)
 
-    // Delete Dataset
-
-    // Delete Object of arrays
-
-    // Sort the Table Number for each data deleted
-    // mengambil elemen nomor table dengan class "table-numbers" sebagai htmlcollection
-    const htmlCollection = document.getElementsByClassName("table-numbers");
+    // Sort Row Number for each data deleted
+    const htmlCollection = document.getElementsByClassName("table-numbers"); // mengambil elemen nomor table dengan class "table-numbers" sebagai htmlcollection
     console.log("_________________________________________");
     console.log(htmlCollection);
 
     // convert htmlCollection to array
     const arrayOfHtmlCollection = Array.prototype.slice.call(htmlCollection);
 
-    console.log(arrayOfHtmlCollection.length);
-
     for (let i = 0; i < arrayOfHtmlCollection.length; i++) {
       console.log(arrayOfHtmlCollection[i]);
       arrayOfHtmlCollection[i].innerHTML = i + 1; // + 1 karena i nilai awalnya 0
     }
 
-    // Sort the bookIndex Dataset for each data deleted
+    // Sort Dataset bookIndex for each data deleted
 
-    /* 
-    console.log("_________________________________________");
-    console.log("setelah delete");
     console.log(row);
-    console.log("row index");
-    console.log(row.rowIndex);
-    console.log("row dataset");
-    console.log(row.dataset); 
+    console.log(row.dataset.bookIndex);
+
+    /*  
+    const datasetCollection = document.getElementById("bookList").dataset;
+
+    console.log("_________________________________________");
+    for (item of datasetCollection) {
+      console.log(item);
+    } 
     */
   }
   resertForm();
