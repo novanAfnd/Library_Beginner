@@ -1,6 +1,14 @@
 // buat agar data pada array, dataset dan table singkron
 // buat agar nomor pada table dan dataset bisa urut setiap salah satu data dihapus
 // buat agar jika memasukkan buku dengan booktitle dan author yang sama akan peringatan error
+// buat agar jika tidak ada input maka tidak bisa disubmit
+// Masalah:
+// 1. buat tidak bisa menginput buku dengan title dan author yang sama
+// ... title sama tapi author beda boleh
+// ... title beda tapi author sama boleh
+// ... title sama dan author sama tidak boleh
+// ... perbaiki pada submit button
+// 2. buat jika form kosong maka tidak bisa disubmit (sudah tapi masih belum canggih)
 
 // Library Array _____________________________________________________________________________________________________________________________________________
 let myLibrary = [];
@@ -41,12 +49,26 @@ let selectedRow = null; // global variable yang menunjukkan keadaan saat form in
 let submitBook = document.getElementById("add-book").addEventListener("click", (e) => {
   e.preventDefault(); // mencegah otomatis submit yang mengharuskan refresh page
   let formData = retrieveData();
-  if (selectedRow === null) {
-    addNewBookToLibrary(formData); // saat data baru
+  if (formData.bookTitle === "") {
+    alert("Book Title must be filled out"); // saat book title kosong
+  } else if (formData.bookAuthor === "") {
+    alert("Book Author must be filled out"); // saat book author kosong
+  } else if (formData.bookPages === "") {
+    alert("Book Pages must be filled out"); // saat book pages kosong
+  } else if (
+    document.getElementById("book-read").checked === false &&
+    document.getElementById("book-not-read").checked === false
+  ) {
+    alert("Please select read status"); // saat read status kosong
+  } else if (selectedRow === null) {
+    addNewBookToLibrary(formData); // saat data baru***
+    resertForm();
   } else {
-    updateData(formData); // saat data lama diperbarui
+    updateData(formData); // saat data lama diperbarui***
+    resertForm();
   }
-  resertForm();
+
+  console.log(formData.bookTitle);
 });
 
 // Add New Book to Library Array _________________________________________________________________________________________________________________________________
@@ -196,8 +218,6 @@ function updateData(formData) {
 // ... misal jika item pada array myLibrary[0,1,2,3] dan yang hilang adalah [2], maka bagaimana agar tidak menjadi [0,1,3]
 // ... hal ini dinamakan "Get the index of an Object in an Array in JavaScript"
 // ... mungkin bisa digunakan findIndex()
-// Masalah:
-// belum bisa menghapus data pada array
 
 function onDelete(td) {
   if (confirm("Do you want to delete this data?")) {
@@ -211,7 +231,7 @@ function onDelete(td) {
         return obj.title === bookTitle && obj.author === bookAuthor;
       });
       if (index > -1) {
-        array.splice(index, 1);
+        array.splice(index, 1); // delete items from "index" => start at "index", remove "1" items
       }
 
       console.log("index item yang di delete");
@@ -261,5 +281,7 @@ function resertForm() {
   document.getElementById("book-pages").value = "";
   document.getElementById("book-read").checked = false;
   document.getElementById("book-not-read").checked = false;
-  selectedRow = null; // kenapa harus ada null?, karena "" tidak bisa menunjukkan nilai kosong pada radio button
+  selectedRow = null;
+  // kenapa harus ada null?, karena agar selectedRow kembali dalam keadaan "null",
+  // ... jika tidak ada null, fungsi submit button untuk menambah data baru akan bertabrakan dengan mengupdate data lama
 }
