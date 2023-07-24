@@ -1,5 +1,5 @@
 // buat agar data pada array, dataset dan table singkron
-// buat agar nomor pada table bisa urut dan singkron dengan array dan dataset
+// buat agar nomor pada table dan dataset bisa urut setiap salah satu data dihapus
 // buat agar jika memasukkan buku dengan booktitle dan author yang sama akan peringatan error
 
 // Library Array _____________________________________________________________________________________________________________________________________________
@@ -117,7 +117,7 @@ function editBook(td) {
   radioButtonEdit();
 
   const index = myLibrary.findIndex((obj) => {
-    return obj.title === selectedRow.dataset.bookTitle;
+    return obj.title === selectedRow.dataset.bookTitle && obj.author === selectedRow.dataset.bookAuthor;
   });
 
   console.log("index secara array");
@@ -164,7 +164,7 @@ function updateData(formData) {
   console.log("_________________________________________");
 
   const index = myLibrary.findIndex((obj) => {
-    return obj.title === selectedRow.dataset.bookTitle;
+    return obj.title === selectedRow.dataset.bookTitle && obj.author === selectedRow.dataset.bookAuthor;
   });
 
   console.log("index secara array");
@@ -201,12 +201,29 @@ function updateData(formData) {
 
 function onDelete(td) {
   if (confirm("Do you want to delete this data?")) {
-    // Delete Rows, Dataset and Array
+    // Delete Row + Dataset
     row = td.parentElement.parentElement;
     document.getElementById("bookList").deleteRow(row.rowIndex); // menghapus row + dataset (bisa dicek pada devtools element)
 
+    // Delete Array
+    function removeItem(array, bookTitle, bookAuthor) {
+      const index = array.findIndex((obj) => {
+        return obj.title === bookTitle && obj.author === bookAuthor;
+      });
+      if (index > -1) {
+        array.splice(index, 1);
+      }
+
+      console.log("index item yang di delete");
+
+      console.log(index);
+      console.log(array);
+    }
+
+    removeItem(myLibrary, row.dataset.bookTitle, row.dataset.bookAuthor); // memanggil function di atasnya
+
     // Sort Row Number for each data deleted
-    const htmlCollection = document.getElementsByClassName("table-numbers"); // mengambil elemen nomor table dengan class "table-numbers" sebagai htmlcollection
+    const htmlCollection = document.getElementsByClassName("table-numbers"); // mengambil elemen nomor table class "table-numbers" sebagai htmlcollection
     console.log("_________________________________________");
     console.log(htmlCollection);
 
@@ -228,9 +245,11 @@ function onDelete(td) {
       i++;
     }
 
+    /* 
     for (let i = 0; i < datasetCollection.length; i++) {
       console.log(datasetCollection[i].parentElement); // untuk mengecek dataset apakah berawal angka 0
-    }
+    } 
+    */
   }
   resertForm();
 }
