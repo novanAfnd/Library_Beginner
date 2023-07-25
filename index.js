@@ -53,7 +53,7 @@ let submitBook = document.getElementById("add-book").addEventListener("click", (
     myLibrary.find((item) => item.title === formData.bookTitle) &&
     myLibrary.find((item) => item.author === formData.bookAuthor)
   ) {
-    alert("Book title or author is already exist");
+    alert("Book title or author is already exist"); // mencegah penambahan book title dan author yang sama
   } else if (formData.bookTitle === "") {
     alert("Book Title must be filled out"); // saat book title kosong
   } else if (formData.bookAuthor === "") {
@@ -127,6 +127,10 @@ function display(data) {
 
 // Edit Data _________________________________________________________________________________________________________________________________________________
 function editBook(td) {
+  alert(
+    "Edit Button digunakan jika anda benar-benar ingin mengubah data anda. Jika tidak ingin mengubah data tapi terlanjur klik Edit maka akan muncul peringatan 'Book title or author is alredy exist'"
+  );
+  alert("Solusinya: edit data anda sedikit kemudian submit, lalu edit lagi nilai data tersebut seperti sebelum diedit");
   // di bawah ini untuk menampilkan data book yang bersangkutan ke form input
   selectedRow = td.parentElement.parentElement;
   document.getElementById("book-title").value = selectedRow.dataset.bookTitle;
