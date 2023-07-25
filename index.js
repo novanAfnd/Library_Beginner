@@ -3,12 +3,11 @@
 // buat agar jika memasukkan buku dengan booktitle dan author yang sama akan peringatan error
 // buat agar jika tidak ada input maka tidak bisa disubmit
 // Masalah:
-// 1. buat tidak bisa menginput buku dengan title dan author yang sama
-// ... title sama tapi author beda boleh
-// ... title beda tapi author sama boleh
-// ... title sama dan author sama tidak boleh
-// ... perbaiki pada submit button
-// 2. buat jika form kosong maka tidak bisa disubmit (sudah tapi masih belum canggih)
+// buat jika form kosong maka tidak bisa disubmit - sudah tapi belum canggih
+// buat tidak bisa menginput buku dengan title dan author yang sama (berlaku juga untuk update) - sudah tapi tambah masalah pada edit
+// jika kita klik edit tapi tidak ingin mengubah apapun, sebelumnya hanya bisa tekan submit.
+// ... sekarang karena jika tidak mengubah apapun maka terdeteksi memiliki title dan author yang sudah ada
+// ... sehingga edit hanya bisa disubmit jika valuenya benar-benar diedit
 
 // Library Array _____________________________________________________________________________________________________________________________________________
 let myLibrary = [];
@@ -49,7 +48,13 @@ let selectedRow = null; // global variable yang menunjukkan keadaan saat form in
 let submitBook = document.getElementById("add-book").addEventListener("click", (e) => {
   e.preventDefault(); // mencegah otomatis submit yang mengharuskan refresh page
   let formData = retrieveData();
-  if (formData.bookTitle === "") {
+  // fungsi untuk find atau mencari data book title dan author yang sama dengan array ditaruh disini, kemudiannya else if-nya untuk !== atau === -nya
+  if (
+    myLibrary.find((item) => item.title === formData.bookTitle) &&
+    myLibrary.find((item) => item.author === formData.bookAuthor)
+  ) {
+    alert("Book title or author is already exist");
+  } else if (formData.bookTitle === "") {
     alert("Book Title must be filled out"); // saat book title kosong
   } else if (formData.bookAuthor === "") {
     alert("Book Author must be filled out"); // saat book author kosong
@@ -68,7 +73,9 @@ let submitBook = document.getElementById("add-book").addEventListener("click", (
     resertForm();
   }
 
-  console.log(formData.bookTitle);
+  console.log("Book Titile: " + formData.bookTitle);
+  console.log("Book Author: " + formData.bookAuthor);
+  console.log(myLibrary);
 });
 
 // Add New Book to Library Array _________________________________________________________________________________________________________________________________
