@@ -272,15 +272,9 @@ function onDelete(td) {
     let i = 0;
     while (i < datasetCollection.length) {
       datasetCollection[i].parentElement.dataset.bookIndex = i; // menggunakan while loop agar dataset awal angka 0
-      //console.log(datasetCollection[i].parentElement);
+      //console.log(datasetCollection[i].parentElement); // untuk mengecek dataset apakah berawal angka 0 atau bisa gunakan for loop agar lebih mantap
       i++;
     }
-
-    /* 
-    for (let i = 0; i < datasetCollection.length; i++) {
-      console.log(datasetCollection[i].parentElement); // untuk mengecek dataset apakah berawal angka 0
-    } 
-    */
   }
   resertForm();
 }
@@ -292,7 +286,6 @@ function resertForm() {
   document.getElementById("book-pages").value = "";
   document.getElementById("book-read").checked = false;
   document.getElementById("book-not-read").checked = false;
-  selectedRow = null;
-  // kenapa harus ada null?, karena agar selectedRow kembali dalam keadaan "null",
+  selectedRow = null; // kenapa harus ada null?, karena agar selectedRow kembali dalam keadaan "null",
   // ... jika tidak ada null, fungsi submit button untuk menambah data baru akan bertabrakan dengan mengupdate data lama
 }
