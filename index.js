@@ -1,7 +1,7 @@
-// buat agar data pada array, dataset dan table singkron
-// buat agar nomor pada table dan dataset bisa urut setiap salah satu data dihapus
-// buat agar jika memasukkan buku dengan booktitle dan author yang sama akan peringatan error
-// buat agar jika tidak ada input maka tidak bisa disubmit
+// buat agar data pada array, dataset dan table singkron - sudah
+// buat agar nomor pada table dan dataset bisa urut setiap salah satu data dihapus - sudah
+// buat agar jika memasukkan buku dengan booktitle dan author yang sama akan peringatan error - sudah
+// buat agar jika tidak ada input maka tidak bisa disubmit - sudah
 // Masalah:
 // buat jika form kosong maka tidak bisa disubmit - sudah tapi belum canggih
 // buat tidak bisa menginput buku dengan title dan author yang sama (berlaku juga untuk update) - sudah tapi tambah masalah pada edit
